@@ -5,12 +5,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { TagModule } from './tag/tag.module';
+import { QuestionsModule } from './questions/questions.module';
 
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb+srv://admin:admin@cluster0.ivbawji.mongodb.net/coding_hub', { useNewUrlParser: true }),
     UserModule,
     TagModule,
+    QuestionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
