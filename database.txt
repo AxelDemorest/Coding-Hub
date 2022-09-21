@@ -24,6 +24,7 @@
 
 //Responses
 {
+    "question_id": Question,
     "content": String,
     "author_id": String,
     "created_at": Date,
