@@ -1,0 +1,31 @@
+// Users
+{
+    "first_name": String,
+    "last_name": String,
+    "type_user": String,
+    "role_user": String,
+    "created_at": Date,
+}
+
+//Tag
+{
+    "tag_name": String,
+}
+
+//Questions
+{
+    "title": String,
+    "content": String,
+    "status": String,
+    "author_id": String,
+    "created_at": Date,
+    "resolve_at": Date,
+}
+
+//Responses
+{
+    "content": String,
+    "author_id": String,
+    "created_at": Date,
+}
+
