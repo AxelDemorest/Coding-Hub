@@ -1,10 +1,11 @@
 export class userDTO {
-    readonly first_name: string;
-    readonly last_name: string;
-    readonly email: string;
-    readonly type_user: string;
-    readonly role_user: role;
-    readonly created_at: Date;
+    first_name: string;
+    last_name: string;
+    email: string;
+    password: string;
+    type_user: string;
+    role_user: role;
+    created_at: Date;
   }
 
 export enum role {
