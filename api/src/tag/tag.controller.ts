@@ -1,4 +1,4 @@
-import { Controller, Post, Res, Body, HttpStatus, Get } from '@nestjs/common';
+import { Controller, Post, Res, Body, HttpStatus, Get, Delete, Param, Patch } from '@nestjs/common';
 import { TagService } from './tag.service';
 import { tagDTO } from './dto/tag.dto';
 import { Tag } from './schemas/tag.schemas';
@@ -16,9 +16,19 @@ export class TagController {
     });
   }
 
-    @Get('/tags')
-    async getTags(@Res() res): Promise<Tag[]> {
-        const tags = await this.tagService.getTags();
-        return res.status(HttpStatus.OK).json(tags);
-    }
+  @Get('/tags')
+  async getTags(@Res() res): Promise<Tag[]> {
+      const tags = await this.tagService.getTags();
+      return res.status(HttpStatus.OK).json(tags);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() tagDTO: tagDTO) {
+    return this.tagService.update(id, tagDTO);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.tagService.delete(id);
+  }
 }

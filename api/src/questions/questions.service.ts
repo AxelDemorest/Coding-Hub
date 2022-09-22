@@ -22,11 +22,11 @@ export class QuestionsService {
     return questions;
   }
 
-  update(id: number, QuestionDto: QuestionDTO) {
-    return `This action updates a #${id} question`;
+  async update(id: string, QuestionDto: QuestionDTO) {
+    return await this.questionModel.findByIdAndUpdate(id, QuestionDto, { new: true });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} question`;
+  async remove(id: string): Promise<any> {
+    return await this.questionModel.findByIdAndRemove(id);
   }
 }

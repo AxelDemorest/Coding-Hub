@@ -27,12 +27,12 @@ export class ResponseController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateResponseDto: ResponseDto) {
-    return this.responseService.update(+id, updateResponseDto);
+  update(@Param('id') id: string, @Body() ResponseDto: ResponseDto) {
+    return this.responseService.update(id, ResponseDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.responseService.remove(+id);
+    return this.responseService.remove(id);
   }
 }

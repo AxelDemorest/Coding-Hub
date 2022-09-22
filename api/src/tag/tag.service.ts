@@ -19,4 +19,12 @@ export class TagService {
     const tags = await this.tagModel.find().exec();
     return tags;
   }
+
+  async update(id: string, tagDTO: tagDTO) {
+    return await this.tagModel.findByIdAndUpdate(id, tagDTO, { new: true });
+  }
+
+  async delete(id: string): Promise<any> {
+    return await this.tagModel.findByIdAndRemove(id);
+  }
 }
