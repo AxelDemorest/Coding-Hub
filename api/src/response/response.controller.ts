@@ -1,6 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus, UseGuards } from '@nestjs/common';
 import { ResponseService } from './response.service';
 import { ResponseDto } from './dto/response.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { role } from 'src/user/dto/user.dto';
+import { Roles } from 'src/auth/guards/roles.decorator';
 
 @Controller('response')
 export class ResponseController {
@@ -16,12 +20,16 @@ export class ResponseController {
   }
 
   @Get('/responses')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(role.ROLE_ADMIN)
   async findAll(@Res() res): Promise<ResponseDto[]> {
     const responses = await this.responseService.findAll();
     return res.status(HttpStatus.OK).json(responses);
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(role.ROLE_ADMIN)
   findOne(@Param('id') id: string) {
     return this.responseService.findOne(+id);
   }

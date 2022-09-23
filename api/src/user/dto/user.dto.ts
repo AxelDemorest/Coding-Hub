@@ -9,6 +9,6 @@ export class userDTO {
   }
 
 export enum role {
-  ROLE_USER,
-  ROLE_ADMIN
+  ROLE_USER = 'USER',
+  ROLE_ADMIN = 'ADMIN'
 }

@@ -21,7 +21,7 @@ export class User {
     @Prop({ required: true })
     type_user: string;
 
-    @Prop({ default: 0 })
+    @Prop({ type: String, enum: role, default: role.ROLE_USER })
     role_user: role;
 
     @Prop({ default: Date.now() })

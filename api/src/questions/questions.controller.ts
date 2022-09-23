@@ -1,6 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus, UseGuards } from '@nestjs/common';
 import { QuestionsService } from './questions.service';
 import { QuestionDTO } from './dto/question.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Roles } from 'src/auth/guards/roles.decorator';
+import { role } from 'src/user/dto/user.dto';
 
 @Controller('questions')
 export class QuestionsController {
@@ -16,6 +20,8 @@ export class QuestionsController {
   }
 
   @Get('/questions')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(role.ROLE_ADMIN)
   async findAll(@Res() res): Promise<QuestionDTO[]> {
     const questions = await this.questionsService.findAll();
     return res.status(HttpStatus.OK).json(questions);

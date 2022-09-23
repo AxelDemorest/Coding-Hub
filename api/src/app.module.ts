@@ -5,11 +5,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import { UserService } from './user/user.service';
-import { AuthService } from './auth/auth.service';
 import { TagModule } from './tag/tag.module';
 import { QuestionsModule } from './questions/questions.module';
 import { ResponseModule } from './response/response.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './auth/guards/roles.guard';
 
 @Module({
   imports: [
