@@ -1,0 +1,8 @@
+-- Accueil (site)
+-- Accueil (forum)
+-- Créer une question
+-- Profil
+-- Paramètres
+-- Inscription
+-- Connexion
+-- Page de la question avec la liste des réponses à côté

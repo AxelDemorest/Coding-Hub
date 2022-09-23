@@ -1,10 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import Navigation from "./components/navigation/navigation";
 
 function App() {
   return (
     <div className="App">
-      <p>salut c'est l'app</p>
+      <Navigation />
     </div>
   );
 }
