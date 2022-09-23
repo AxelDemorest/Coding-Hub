@@ -25,11 +25,11 @@ export class ResponseService {
     return `This action returns a #${id} response`;
   }
 
-  update(id: number, ResponseDto: ResponseDto) {
-    return `This action updates a #${id} response`;
+  async update(id: string, ResponseDto: ResponseDto) {
+    return await this.responseModel.findByIdAndUpdate(id, ResponseDto, { new: true });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} response`;
+  async remove(id: string): Promise<any> {
+    return await this.responseModel.findByIdAndRemove(id);
   }
 }
