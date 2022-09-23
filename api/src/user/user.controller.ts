@@ -34,6 +34,8 @@ export class UserController {
     }
 
     @Delete(':id')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(role.ROLE_ADMIN)
     remove(@Param('id') id: string) {
         return this.userService.delete(id);
     }

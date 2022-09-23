@@ -31,11 +31,15 @@ export class TagController {
   }
 
   @Patch(':id')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(role.ROLE_ADMIN)
   update(@Param('id') id: string, @Body() tagDTO: tagDTO) {
     return this.tagService.update(id, tagDTO);
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(role.ROLE_ADMIN)
   remove(@Param('id') id: string) {
     return this.tagService.delete(id);
   }
