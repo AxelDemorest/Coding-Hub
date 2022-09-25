@@ -1,11 +1,14 @@
-import Navigation from "./components/navigation/Navigation";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./views/Register";
 
 function App() {
   return (
     <div className="App">
-      <Navigation />
-      <Register />
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/inscription" element={<Register />}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
