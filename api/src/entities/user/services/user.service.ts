@@ -7,6 +7,7 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
+    
     constructor(@InjectModel(User.name) private userModel: Model<userDocument>) { }
 
     async addUser(userDTO: userDTO): Promise<User> {
@@ -22,7 +23,15 @@ export class UserService {
         return users;
     }
 
-    async getUser(email): Promise<User> {
+    async findOne(email: string): Promise<User> {
+        const user = await this.userModel.findOne({ email }).exec();
+        if (!user) {
+            throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+        }
+        return user;
+    }
+
+    async getUser(email: string): Promise<User> {
         return await this.userModel.findOne({ email }).exec();
     }
 

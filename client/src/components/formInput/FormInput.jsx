@@ -10,7 +10,7 @@ const FormInput = (props) => {
     };
 
     return (
-        <div>
+        <FormGroup>
             <label>{label}</label>
             <SingleFormInput
                 inputWidth={width}
@@ -21,7 +21,7 @@ const FormInput = (props) => {
                 focused={focused.toString()}
             />
             <span>{errorMessage}</span>
-        </div>
+        </FormGroup>
     );
 };
 
@@ -34,6 +34,12 @@ const SingleFormInput = styled.input`
     width: ${props => props.inputWidth};
     color: grey;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+`
+
+const FormGroup = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
 `
 
 export default FormInput;

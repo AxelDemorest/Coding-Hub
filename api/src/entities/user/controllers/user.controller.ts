@@ -28,6 +28,11 @@ export class UserController {
         return res.status(HttpStatus.OK).json(users);
     }
 
+    @Get('/user/:email')
+    async findOne(@Param('email') email: string) {
+        return this.userService.findOne(email);
+    }
+
     @Patch(':id')
     update(@Param('id') id: string, @Body() userDTO: userDTO) {
         return this.userService.update(id, userDTO);
