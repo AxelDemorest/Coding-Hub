@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import './formInput.css';
 
 const FormInput = (props) => {
     const [focused, setFocused] = useState(false);
@@ -10,30 +11,40 @@ const FormInput = (props) => {
     };
 
     return (
-        <div>
-            <label>{label}</label>
-            <SingleFormInput
-                inputWidth={width}
+        <FormGroup>
+            <FormLabel>{label}</FormLabel>
+            <input className='singleFormInput'
+                style={{width: width}}
                 {...inputProps}
                 onChange={onChange}
                 onBlur={handleFocus}
                 onFocus={() => inputProps.name === "confirmPassword" && setFocused(true)}
                 focused={focused.toString()}
             />
-            <span>{errorMessage}</span>
-        </div>
+            <FormError>{errorMessage}</FormError>
+        </FormGroup>
     );
 };
 
-const SingleFormInput = styled.input`
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    font-size: 17px;
-    padding: 10px;
-    width: ${props => props.inputWidth};
-    color: grey;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-`
+const FormGroup = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+`;
+
+const FormLabel = styled.div`
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 7px;
+`;
+
+const FormError = styled.div`
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 7px;
+    color: #d01e1e;
+    display: none;
+`;
 
 export default FormInput;
