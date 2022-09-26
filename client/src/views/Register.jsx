@@ -73,7 +73,7 @@ const Register = () => {
         },
     ];
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             await axios.post('http://localhost:3001/user/user', values)
