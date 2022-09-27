@@ -1,9 +1,13 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 import TextField from '@mui/material/TextField';
 import { IoNotificationsSharp } from 'react-icons/io5';
 import { FaUserAlt } from 'react-icons/fa';
+import { AuthContext } from '../../context/AuthContext';
 
 const Navigation = () => {
+    const { user } = useContext(AuthContext)
+
     return (
         <Nav className='navigation'>
             <LeftNavigation>
@@ -15,17 +19,17 @@ const Navigation = () => {
                 </NavItems>
             </LeftNavigation>
             <RightNavigation>
-                <SearchInput>
-                    <TextField
-                        id="standard-search"
-                        label="Recherche"
-                        type="search"
-                        variant="standard"
-                    />
-                </SearchInput>
+                {user ? (
+                    <ButtonForum>Se déconnecter</ButtonForum>
+                ) : (
+                    <div>
+                        <ButtonForum>Se connecter</ButtonForum>
+                        <ButtonForum>Créer un compte</ButtonForum>
+                    </div>
+                )}
                 <ListIcons>
-                    <IoNotificationsSharp style={{ color: '#D1D3D5', fontSize: '25px' }} />
-                    <FaUserAlt style={{ color: '#D1D3D5', fontSize: '20px', marginTop: '2px' }} />
+                    <IoNotificationsSharp style={{ color: '#A77FF2', fontSize: '25px', cursor: 'pointer' }} />
+                    <FaUserAlt style={{ color: '#A77FF2', fontSize: '20px', marginTop: '2px', cursor: 'pointer' }} />
                 </ListIcons>
             </RightNavigation>
         </Nav>
@@ -34,16 +38,17 @@ const Navigation = () => {
 
 const WebSiteIcon = styled.h2`
     font-size: '45px';
-    font-weight: 400;
+    font-weight: 700;
+    color: #2F2F2F;
     width: 30%;
 `
 
 const Nav = styled.nav`
     display: flex;
-    background: #fffcf6;
+    background-color: #FFFFFF;
     justify-content: space-between;
     height: 90px;
-    padding: 0 30px;
+    padding: 0 80px;
     align-items: center;
 `
 
@@ -59,9 +64,21 @@ const RightNavigation = styled.div`
     width: 50%;
 `
 
-const SearchInput = styled.div`
-    margin-bottom: 20px;
-    margin-right: 30px;
+const ButtonForum = styled.button`
+    &:hover {
+        background-color: #8B6ED8;
+        color: #FFFFFF;
+    }
+    transition: color 0.2s, background-color 0.2s;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    border: 1px solid #A77FF2;
+    border-radius: 30px;
+    padding: 10px 30px;
+    font-size: 1.02rem;
+    color: #A77FF2;
+    font-weight: 600;
+    margin-right: 20px;
 `
 
 const NavItems = styled.ul`
@@ -69,15 +86,16 @@ const NavItems = styled.ul`
     width: 100%;
     justify-content: start;
     align-items: center;
+    padding-left: 80px;
 `
 
 const NavLink = styled.li`
-    margin: 0 2rem;
+    margin: 0 1.5rem;
     font-size: 1.02rem;
-    font-weight: 600;
+    font-weight: 500;
     list-style: none;
     cursor: pointer;
-    color: #696969;
+    color: #4e4e4e;
 `
 
 const ListIcons = styled.div`

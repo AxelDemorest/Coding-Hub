@@ -3,7 +3,7 @@ import FormInput from '../components/formInput/FormInput';
 import styled from 'styled-components';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const axios = require('axios').default;
 
@@ -118,6 +118,7 @@ const Register = () => {
                         />
                     ))}
                     <SubmitButton>S'inscrire</SubmitButton>
+                    <NoAccountText>Vous avez déjà un compte ? <Link to="/connexion">Connectez-vous !</Link></NoAccountText>
                 </FormRegister>
             </LeftContainer>
             <RightContainer>
@@ -125,6 +126,10 @@ const Register = () => {
         </Container>
     );
 };
+
+const NoAccountText = styled.p`
+    margin-top: 22px;
+`
 
 const Container = styled.div`
     height: 100vh;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import FormInput from '../components/formInput/FormInput';
 import Alert from '@mui/material/Alert';
 import { AuthContext } from '../context/AuthContext';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import jwt_decode from 'jwt-decode';
 
 const axios = require('axios').default;
@@ -44,8 +44,8 @@ const Login = () => {
             dispatch({ type: "LOGIN_SUCCESS", payload: jwt_decode(user.data.access_token) });
             navigate(state?.path || "/", { replace: true });
         } catch(err) {
-            console.log(err);
-            setIsError(true);
+            setIsError(true)
+            dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
         }
     }
 
@@ -75,7 +75,7 @@ const Login = () => {
                         <Button type="submit">Se connecter</Button>
                     </FormGroup>
                 </FormLogin>
-                <NoAccountText>Vous n'avez pas encore de compte ? <a href="/inscription">Inscrivez-vous !</a></NoAccountText>
+                <NoAccountText>Vous n'avez pas encore de compte ? <Link to="/inscription">Inscrivez-vous !</Link></NoAccountText>
             </LeftForm>
             <RightImg className="right"></RightImg>
         </LoginForm>
