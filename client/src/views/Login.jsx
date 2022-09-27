@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import FormInput from '../components/formInput/FormInput';
-import jwt_decode from 'jwt-decode';
 import Alert from '@mui/material/Alert';
-import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../context/AuthContext';
+import { useNavigate, useLocation } from "react-router-dom";
+import jwt_decode from 'jwt-decode';
 
 const axios = require('axios').default;
 
 const Login = () => {
     const navigate = useNavigate();
+    const { state } = useLocation();
+    const { dispatch } = useContext(AuthContext)
     const [isError, setIsError] = useState(false);
     const [values, setValues] = useState({
         email: '',
@@ -37,14 +40,11 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const user = await axios.post('http://localhost:3001/auth/login', {
-                email: values.email,
-                password: values.password,
-            });
-            localStorage.setItem('JWT', user.data.access_token);
-            localStorage.setItem('User', JSON.stringify(jwt_decode(user.data.access_token)));
-            navigate("/", { replace: true });
+            const user = await axios.post('http://localhost:3001/auth/login', values);
+            dispatch({ type: "LOGIN_SUCCESS", payload: jwt_decode(user.data.access_token) });
+            navigate(state?.path || "/", { replace: true });
         } catch(err) {
+            console.log(err);
             setIsError(true);
         }
     }
