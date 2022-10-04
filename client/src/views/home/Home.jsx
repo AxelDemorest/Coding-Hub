@@ -2,17 +2,22 @@ import React from 'react';
 import Navigation from '../../components/navigation/Navigation';
 import banner from '../../assets/banner.jpg';
 import styled from 'styled-components';
+import './home.css';
 
 const Home = () => {
     return (
         <div>
             <Navigation />
-            <LineSeparator></LineSeparator>
             <GlobalContainer>
                 <LeftContainer>
                     <BannerTitle>Aidons nos élèves à développer leurs compétences!</BannerTitle>
                     <BannerDescription>Ce forum a été conçu pour répondre aux questions de tous les élèves en difficultés dans leurs projets</BannerDescription>
                     <ButtonCreateQuestion>Créer un sujet</ButtonCreateQuestion>
+                    <div className='list-benefits'>
+                        <div>
+                            <p>salu salu</p>
+                        </div>
+                    </div>
                 </LeftContainer>
                 <RightContainer>
                     <img src={banner} style={{ marginTop: '20px' }} alt="Logo" width='100%' />
@@ -21,13 +26,6 @@ const Home = () => {
         </div>
     );
 };
-
-const LineSeparator = styled.hr`
-    width: 90%;
-    margin: auto;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-`;
 
 const GlobalContainer = styled.div`
     width: 100%;

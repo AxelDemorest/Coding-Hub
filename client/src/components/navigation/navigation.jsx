@@ -1,40 +1,51 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import TextField from '@mui/material/TextField';
 import { IoNotificationsSharp } from 'react-icons/io5';
 import { FaUserAlt } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthContext';
+import { Link } from "react-router-dom";
+import './navigation.css';
 
 const Navigation = () => {
     const { user } = useContext(AuthContext)
 
     return (
-        <Nav className='navigation'>
-            <LeftNavigation>
-                <WebSiteIcon>Coding Hub</WebSiteIcon>
-                <NavItems className='navItems'>
-                    <NavLink className="navlink">Accueil</NavLink>
-                    <NavLink className="navlink">Tags</NavLink>
-                    <NavLink className="navlink">ddddd</NavLink>
-                </NavItems>
-            </LeftNavigation>
-            <RightNavigation>
-                {user ? (
-                    <ButtonForum>Se déconnecter</ButtonForum>
-                ) : (
-                    <div>
-                        <ButtonForum>Se connecter</ButtonForum>
-                        <ButtonForum>Créer un compte</ButtonForum>
-                    </div>
-                )}
-                <ListIcons>
-                    <IoNotificationsSharp style={{ color: '#A77FF2', fontSize: '25px', cursor: 'pointer' }} />
-                    <FaUserAlt style={{ color: '#A77FF2', fontSize: '20px', marginTop: '2px', cursor: 'pointer' }} />
-                </ListIcons>
-            </RightNavigation>
-        </Nav>
+        <div className='navigation'>
+            <Nav>
+                <LeftNavigation>
+                    <WebSiteIcon>Coding Hub</WebSiteIcon>
+                    <NavItems className='navItems'>
+                        <NavLink className="navlink">Accueil</NavLink>
+                        <NavLink className="navlink">Tags</NavLink>
+                        <NavLink className="navlink">ddddd</NavLink>
+                    </NavItems>
+                </LeftNavigation>
+                <RightNavigation>
+                    {user ? (
+                        <ButtonForum>Se déconnecter</ButtonForum>
+                    ) : (
+                        <div>
+                            <LinkUser to="/connexion">Se connecter</LinkUser>
+                            <LinkUser to="/inscription">Créer un compte</LinkUser>
+                        </div>
+                    )}
+                    <ListIcons>
+                        <IoNotificationsSharp style={{ color: '#A77FF2', fontSize: '25px', cursor: 'pointer' }} />
+                        <FaUserAlt style={{ color: '#A77FF2', fontSize: '20px', marginTop: '2px', cursor: 'pointer' }} />
+                    </ListIcons>
+                </RightNavigation>
+            </Nav>
+            <LineSeparator></LineSeparator>
+         </div>
     )
 }
+
+const LineSeparator = styled.hr`
+    width: 90%;
+    margin: auto;
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+`;
 
 const WebSiteIcon = styled.h2`
     font-size: '45px';
@@ -62,6 +73,24 @@ const RightNavigation = styled.div`
     justify-content: end;
     align-items: center;
     width: 50%;
+`
+
+const LinkUser = styled(Link)`
+    &:hover {
+        background-color: #8B6ED8;
+        color: #FFFFFF;
+    }
+    transition: color 0.2s, background-color 0.2s;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    border: 1px solid #A77FF2;
+    border-radius: 30px;
+    padding: 10px 30px;
+    font-size: 1.02rem;
+    color: #A77FF2;
+    font-weight: 600;
+    margin-right: 20px;
+    text-decoration: none;
 `
 
 const ButtonForum = styled.button`
