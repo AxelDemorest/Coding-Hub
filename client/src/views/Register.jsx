@@ -17,7 +17,7 @@ const Register = () => {
         email: "",
         password: "",
         confirm_password: "",
-      });
+    });
 
     const inputs = [
         {

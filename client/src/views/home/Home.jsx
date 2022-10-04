@@ -8,6 +8,7 @@ const Home = () => {
     return (
         <div>
             <Navigation />
+            <LineSeparator></LineSeparator>
             <GlobalContainer>
                 <LeftContainer>
                     <BannerTitle>Aidons nos élèves à développer leurs compétences!</BannerTitle>
@@ -26,6 +27,13 @@ const Home = () => {
         </div>
     );
 };
+
+const LineSeparator = styled.hr`
+    width: 90%;
+    margin: auto;
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+`;
 
 const GlobalContainer = styled.div`
     width: 100%;

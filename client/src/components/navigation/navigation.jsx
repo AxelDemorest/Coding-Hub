@@ -35,17 +35,9 @@ const Navigation = () => {
                     </ListIcons>
                 </RightNavigation>
             </Nav>
-            <LineSeparator></LineSeparator>
          </div>
     )
 }
-
-const LineSeparator = styled.hr`
-    width: 90%;
-    margin: auto;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-`;
 
 const WebSiteIcon = styled.h2`
     font-size: '45px';
