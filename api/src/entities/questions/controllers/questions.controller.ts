@@ -20,7 +20,6 @@ export class QuestionsController {
   }
 
   @Get('/questions')
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(role.ROLE_ADMIN)
   async findAll(@Res() res): Promise<QuestionDTO[]> {
     const questions = await this.questionsService.findAll();

@@ -1,10 +1,20 @@
 import React from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Navigation from '../../components/navigation/Navigation';
 
 const Forum = () => {
+    const [questions, setQuestions] = useState([]);
 
-    const listHeaderTitle = ['Réponses', 'Tags'];
+    const getQuestions = async () => {
+        const { data } = await axios.get('http://localhost:3001/questions/questions');
+        setQuestions(data);
+    };
+
+    useEffect(() => {
+        getQuestions();
+    }, []);
 
     return (
         <div>
@@ -12,28 +22,20 @@ const Forum = () => {
             <ForumContainer>
                 <SideContainer></SideContainer>
                 <ListTopics>
-                    <TitleList>Liste des questions</TitleList>
-                    <HeaderTable>
+                        <TitleList>Liste des questions</TitleList>
+                    <ContainerInList>
                         <HeaderTitle>Questions</HeaderTitle>
-                        <div>
-                            {listHeaderTitle.map((element, index) => (
-                                <HeaderTitle>{element}</HeaderTitle>
-                            ))}
-                        </div>
-                    </HeaderTable>
-                    <div style={{ marginTop: '10px' }}>
-                        <Topic>
+                        <HeaderTitle>Réponses</HeaderTitle>
+                    </ContainerInList>
+                    {questions.map((question) => (
+                        <ContainerInList key={question._id} style={{ marginTop: '10px' }}>
                             <div>
-                                <QuestionTitle>C'est quoi une variable en PHP ?</QuestionTitle>
+                                <QuestionTitle>{question.title}</QuestionTitle>
                                 <QuestionAuthor>Alexis Demorest <QuestionCreatedDate>Mardi 3 Juillet</QuestionCreatedDate></QuestionAuthor>
                             </div>
-                            <div>
-                                <NumberReplies>34</NumberReplies>
-                                <Tag>PHP</Tag>
-                            </div>
-                        </Topic>
-                        <LineSeparator />
-                    </div>
+                            <NumberReplies>34</NumberReplies>
+                        </ContainerInList>
+                    ))}
                 </ListTopics>
                 <SideContainer></SideContainer>
             </ForumContainer>
@@ -66,7 +68,7 @@ const ListTopics = styled.div`
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 `;
 
-const HeaderTable = styled.div`
+const ContainerInList = styled.div`
     width: 100%;
     background-color: #F9FAFC;
     border-radius: 10px;
@@ -79,20 +81,12 @@ const HeaderTable = styled.div`
 `;
 
 const HeaderTitle = styled.p`
-    color: black;
     font-size: 12px;
     text-transform: uppercase;
     font-weight: 600;
     display: inline-block;
     margin-right: 50px;
     color: #505050;
-`;
-
-const Topic = styled.div`
-    padding: 15px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 `;
 
 const QuestionTitle = styled.p`
@@ -108,23 +102,19 @@ const QuestionAuthor = styled.p`
 `;
 
 const NumberReplies = styled.p`
+    font-size: 15px;
+    font-weight: 600;
+    margin-right: 95px;
     color: black;
-    display: inline-block;
-    margin-right: 50px;
 `;
 
 const Tag = styled.p`
+    margin-right: 45px;
 `;
 
 const QuestionCreatedDate = styled.span`
     color: #99A5B2;
     margin-left: 10px;
-`;
-
-const LineSeparator = styled.hr`
-    width: 100%;
-    margin: auto;
-    border: 0.5px solid #f1f1f1;
 `;
 
 const SideContainer = styled.div`
