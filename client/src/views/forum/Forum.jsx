@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Navigation from '../../components/navigation/Navigation';
+import Navigation from '../../components/navigation/navigation';
 
 const Forum = () => {
     const [questions, setQuestions] = useState([]);

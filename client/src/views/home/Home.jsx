@@ -1,5 +1,5 @@
 import React from 'react';
-import Navigation from '../../components/navigation/Navigation';
+import Navigation from '../../components/navigation/navigation';
 import banner from '../../assets/banner.jpg';
 import styled from 'styled-components';
 import './home.css';
