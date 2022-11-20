@@ -16,7 +16,7 @@ const Home = () => {
                     <ButtonCreateQuestion>Créer un sujet</ButtonCreateQuestion>
                     <div className='list-benefits'>
                         <div>
-                            <p>salu salu</p>
+
                         </div>
                     </div>
                 </LeftContainer>

@@ -5,6 +5,8 @@ import Home from "./views/home/Home";
 import Account from "./views/account/Account";
 import RequireAuth from "./components/requireAuth/RequireAuth";
 import Forum from "./views/forum/Forum";
+import CreateTopic from "./views/createTopic/createTopic";
+import './App.less';
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
           <Route exact path="/inscription" element={<Register />}/>
           <Route exact path="/connexion" element={<Login />}/>
           <Route exact path="/forum" element={<Forum />}/>
+          <Route exact path="/creer-une-question" element={<CreateTopic />}/>
           <Route exact path="/profil" element={
               <RequireAuth>
                 <Account />
