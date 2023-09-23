@@ -1,0 +1,1 @@
+.navigation{display:flex;flex-direction:column;height:80px}input:invalid[focused=true]{border:1px solid #d01e1e}input:invalid[focused=true]~div{display:block}.singleFormInput{outline:none;border:none;border-radius:5px;font-size:15px;padding:13px 0 13px 13px;color:gray;box-shadow:#0000000d 0 6px 24px,#00000014 0 0 0 1px}

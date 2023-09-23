@@ -10,7 +10,8 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "antd": "^4.24.0",
+    "@vitejs/plugin-react-swc": "^3.3.2",
+    "antd": "^5.9.2",
     "axios": "^0.27.2",
     "craco-antd": "^2.0.0",
     "jwt-decode": "^3.1.2",
@@ -20,18 +21,19 @@
     "react-icons": "^4.4.0",
     "react-markdown": "^8.0.3",
     "react-router-dom": "^6.4.1",
-    "react-scripts": "5.0.1",
     "react-select": "^5.6.1",
     "react-syntax-highlighter": "^15.5.0",
     "remark-gfm": "^3.0.1",
     "styled-components": "^5.3.5",
+    "vite": "^4.4.9",
+    "vite-plugin-svgr": "^3.2.0",
+    "vite-tsconfig-paths": "^4.2.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "craco eject"
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "eslintConfig": {
     "extends": [

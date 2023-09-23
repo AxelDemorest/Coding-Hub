@@ -1,39 +1,34 @@
 import React from "react";
-import axios from "axios";
 import { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
-import Navigation from "../../components/navigation/Navigation";
 import { MdFiberNew } from "react-icons/md";
-import { BsFillBookmarkStarFill } from "react-icons/bs";
+import styled, { css } from "styled-components";
 import { RiUserFollowFill } from "react-icons/ri";
+import { BsFillBookmarkStarFill } from "react-icons/bs";
+import { getLatestTopics } from "../../api/services/topicServices";
+import SubContainer from "./components/SubContainer/SubContainer";
+import Container from "../../components/container/Container";
+import TopicItem from "./components/TopicItem/TopicItem";
+import Users from "./components/Users/Users";
 import { Link } from "react-router-dom";
 
 const Forum = () => {
-  const [questions, setQuestions] = useState([]);
-
-  const truncate = (str) => {
-    return str.length > 200 ? str.substring(0, 200) + "..." : str;
-  };
-
-  const getQuestions = async () => {
-    const { data } = await axios.get(
-      "http://localhost:3001/questions/questions"
-    );
-    setQuestions(data);
-  };
+  const [topics, setTopics] = useState([]);
 
   useEffect(() => {
-    getQuestions();
+    const fetchData = async () => {
+      const response = await getLatestTopics();
+      setTopics(response);
+    }
+
+    fetchData();
   }, []);
 
   return (
-    <div>
-      <Navigation />
+    <Container>
       <ForumContainer>
         {/* --- SIDE CONTAINER --- */}
         <GlobalContainer>
           <ListFilterItems>
-            <div>
               <FilterItem>
                 <NewIcon />
                 <div>
@@ -57,100 +52,22 @@ const Forum = () => {
                   </ItemDescription>
                 </div>
               </FilterItem>
-            </div>
           </ListFilterItems>
         </GlobalContainer>
         {/* --- MIDDLE CONTAINER --- */}
         <ListTopicsContainer>
-          {questions.map((question) => (
-            <QuestionItem key={`question-${question._id}`}>
-              <div>
-                <div>
-                  <TitleQuestion>{question.title}</TitleQuestion>
-                  {question.is_resolved ? (
-                    <ResolvedTag>Sujet résolu</ResolvedTag>
-                  ) : (
-                    <NotResolvedTag>Sujet non résolu</NotResolvedTag>
-                  )}
-                </div>
-                <ListTags>
-                  <QuestionTag>PHP</QuestionTag>
-                  <QuestionTag>Symfony</QuestionTag>
-                </ListTags>
-              </div>
-              <QuestionContent>{truncate(question.content)}</QuestionContent>
-              <QuestionFooter>
-                <QuestionAuthor>{question.author_id}</QuestionAuthor>
-                <div>
-                  <QuestionReplies>104 réponses</QuestionReplies>
-                </div>
-              </QuestionFooter>
-            </QuestionItem>
+          {topics.map((topic) => (
+            <TopicItem topic={topic} />
           ))}
         </ListTopicsContainer>
         {/* --- SIDE CONTAINER --- */}
         <GlobalContainer>
-          <NewTopicButton to="/creer-une-question">Créer un nouveau topic</NewTopicButton>
-          <SubContainer>
-            <TitleSubContainer>Membres populaires</TitleSubContainer>
-            <UserItem>
-              <div style={{ width: "10%" }}>
-                <UserAvatar src="https://zupimages.net/up/21/06/3w5i.png" />
-              </div>
-              <UserInformations>
-                <UserPseudo>Axel Demorest</UserPseudo>
-                <UserFollowers>500</UserFollowers>
-              </UserInformations>
-            </UserItem>
-            <UserItem>
-              <div style={{ width: "10%" }}>
-                <UserAvatar src="https://zupimages.net/up/21/06/3w5i.png" />
-              </div>
-              <UserInformations>
-                <UserPseudo>Axel Demorest</UserPseudo>
-                <UserFollowers>500</UserFollowers>
-              </UserInformations>
-            </UserItem>
-            <UserItem>
-              <div style={{ width: "10%" }}>
-                <UserAvatar src="https://zupimages.net/up/21/06/3w5i.png" />
-              </div>
-              <UserInformations>
-                <UserPseudo>Axel Demorest</UserPseudo>
-                <UserFollowers>500</UserFollowers>
-              </UserInformations>
-            </UserItem>
-            <UserItem>
-              <div style={{ width: "10%" }}>
-                <UserAvatar src="https://zupimages.net/up/21/06/3w5i.png" />
-              </div>
-              <UserInformations>
-                <UserPseudo>Axel Demorest</UserPseudo>
-                <UserFollowers>500</UserFollowers>
-              </UserInformations>
-            </UserItem>
-            <UserItem>
-              <div style={{ width: "10%" }}>
-                <UserAvatar src="https://zupimages.net/up/21/06/3w5i.png" />
-              </div>
-              <UserInformations>
-                <UserPseudo>Axel Demorest</UserPseudo>
-                <UserFollowers>500</UserFollowers>
-              </UserInformations>
-            </UserItem>
-            <UserItem>
-              <div style={{ width: "10%" }}>
-                <UserAvatar src="https://zupimages.net/up/21/06/3w5i.png" />
-              </div>
-              <UserInformations>
-                <UserPseudo>Axel Demorest</UserPseudo>
-                <UserFollowers>500</UserFollowers>
-              </UserInformations>
-            </UserItem>
+          <NewTopicButton to="/forum/topic/new">Créer un nouveau topic</NewTopicButton>
+          <SubContainer title={'Membres populaires'}>
+            <Users />
           </SubContainer>
-          <SubContainer>
-            <TitleSubContainer>Statistiques</TitleSubContainer>
-            <StatisticList>
+          <SubContainer title={'Statistiques'}>
+            <div>
               <StatisticItem>
                 <TitleItem>Topics</TitleItem>
                 <TitleCount>200</TitleCount>
@@ -163,11 +80,11 @@ const Forum = () => {
                 <TitleItem>Membres</TitleItem>
                 <TitleCount>1,393</TitleCount>
               </StatisticItem>
-            </StatisticList>
+            </div>
           </SubContainer>
         </GlobalContainer>
       </ForumContainer>
-    </div>
+    </Container>
   );
 };
 
@@ -176,10 +93,7 @@ const Forum = () => {
 // --- -------------------- --- //
 
 const ForumContainer = styled.div`
-  width: 100%;
-  height: calc(100vh - 90px);
   padding: 20px 40px;
-  background-color: #f7f7f7;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -191,22 +105,15 @@ const GlobalContainer = styled.div`
   flex-direction: column;
 `;
 
-const SubContainer = styled.div`
-  border-radius: 10px;
-  background-color: #ffffff;
-  padding: 15px;
-  margin-bottom: 20px;
-`;
-
 const ListTopicsContainer = styled(GlobalContainer)`
   width: 67%;
   margin: 0 20px;
-  overflow-y: scroll;
-  height: 80vh;
 `;
 
 const ListFilterItems = styled(SubContainer)`
   padding: 10px;
+  position: sticky;
+  top: 10px;
 `;
 
 const FilterItem = styled.div`
@@ -233,74 +140,9 @@ const ItemDescription = styled.small`
   font-size: 11px;
 `;
 
-const QuestionItem = styled(SubContainer)`
-  padding: 20px 25px;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
-const TitleQuestion = styled.p`
-  font-weight: 600;
-  font-size: 17px;
-  color: #424244;
-  display: inline-block;
-  margin-right: 15px;
-  margin-bottom: 0;
-`;
-
-const ResolvedTag = styled.span`
-  font-size: 12px;
-  color: #0ecc8e;
-  background-color: #d7faef;
-  padding: 5px 10px;
-  border-radius: 20px;
-`;
-
-const NotResolvedTag = styled.span`
-  font-size: 12px;
-  color: #cc0e0e;
-  background-color: #fad7d7;
-  padding: 5px 10px;
-  border-radius: 20px;
-`;
-
-const QuestionContent = styled.p`
-  font-size: 14px;
-  color: #656f7c;
-`;
-
-const ListTags = styled.div`
-  margin: 12px 0 10px 0;
-`;
-
-const QuestionTag = styled(ResolvedTag)`
-  font-size: 11px;
-  padding: 4px 15px;
-  color: #818181;
-  background-color: #ececec;
-  margin-right: 10px;
-`;
-
-const QuestionFooter = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const QuestionAuthor = styled.p`
-  color: #424244;
-  font-weight: 500;
-`;
-
-const QuestionReplies = styled.p`
-  color: #8e8e8e;
-  font-size: 13px;
-`;
-
 const NewTopicButton = styled(Link)`
   text-align: center;
+  text-decoration: none;
   color: #fff;
   font-weight: 500;
   font-size: 15px;
@@ -315,45 +157,6 @@ const NewTopicButton = styled(Link)`
     color: #fff;
   }
 `;
-
-const TitleSubContainer = styled.h3`
-  font-weight: 600;
-  font-size: 17px;
-  color: #424244;
-  margin-bottom: 25px;
-`;
-
-const UserItem = styled.div`
-  padding: 0 5px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 10px;
-`;
-
-const UserAvatar = styled.img`
-  border-radius: 50%;
-  width: 100%;
-`;
-
-const UserInformations = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const UserPseudo = styled.p`
-  color: #424244;
-  font-weight: 500;
-  padding-right: 15px;
-`;
-
-const UserFollowers = styled.p`
-  font-size: 12px;
-  color: #898989;
-  font-weight: 400;
-`;
-
-const StatisticList = styled.div``;
 
 const StatisticItem = styled.div`
   display: flex;

@@ -1,0 +1,74 @@
+@font-face {
+    font-family: "SpaceGroteskLight";
+    src: url("./fonts/spacegrotesk/SpaceGrotesk-Light.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SpaceGroteskRegular";
+    src: url("./fonts/spacegrotesk/SpaceGrotesk-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SpaceGroteskMedium";
+    src: url("./fonts/spacegrotesk/SpaceGrotesk-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SpaceGroteskBold";
+    src: url("./fonts/spacegrotesk/SpaceGrotesk-Bold.ttf") format("truetype");
+}
+
+/* Monserrat */
+
+@font-face {
+    font-family: "MontserratMedium";
+    src: url("./fonts/montserrat/Montserrat-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "MontserratRegular";
+    src: url("./fonts/montserrat/Montserrat-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "MontserratSemiBold";
+    src: url("./fonts/montserrat/Montserrat-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "MontserratBold";
+    src: url("./fonts/montserrat/Montserrat-Bold.ttf") format("truetype");
+}
+
+/* Raleway */
+
+@font-face {
+    font-family: "RalewayLight";
+    src: url("./fonts/raleway/Raleway-Light.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "RalewayRegular";
+    src: url("./fonts/raleway/Raleway-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "RalewayMedium";
+    src: url("./fonts/raleway/Raleway-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "RalewaySemiBold";
+    src: url("./fonts/raleway/Raleway-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "RalewayBold";
+    src: url("./fonts/raleway/Raleway-Bold.ttf") format("truetype");
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'MontserratRegular', sans-serif;
+}

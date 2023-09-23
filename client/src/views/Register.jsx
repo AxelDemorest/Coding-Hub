@@ -3,9 +3,8 @@ import FormInput from '../components/formInput/FormInput';
 import styled from 'styled-components';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import axios from 'axios';
 import { useNavigate, Link } from "react-router-dom";
-
-const axios = require('axios').default;
 
 const Register = () => {
     const navigate = useNavigate();
@@ -83,7 +82,7 @@ const Register = () => {
             }, 2000);
         } catch(err) {
             setIsFormError(true);
-        } 
+        }
     };
 
     const onChange = (e) => {
@@ -109,7 +108,7 @@ const Register = () => {
                         <FormHeaderDescription>Merci d'entrer vos informations de connexion.</FormHeaderDescription>
                     </FormHeader>
                     {inputs.map((input) => (
-                        <FormInput 
+                        <FormInput
                             key={input.id}
                             width='100%'
                             {...input}

@@ -1,26 +1,40 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './controller/app.controller';
-import { AppService } from './service/app.service';
-import { UserModule } from '../entities/user/user.module';
 import { AuthModule } from '../auth/auth.module';
-import { TagModule } from '../entities/tag/tag.module';
-import { QuestionsModule } from '../entities/questions/questions.module';
-import { ResponseModule } from '../entities/response/response.module';
-import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from '../auth/guards/roles.guard';
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {PostModule} from "../post/post.module";
+import {UserModule} from "../user/user.module";
+import {CategoryModule} from "../category/category.module";
+import {TopicModule} from "../topic/topic.module";
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://admin:admin@cluster0.ivbawji.mongodb.net/coding_hub', { useNewUrlParser: true }),
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        type: 'mysql',
+        host: configService.get<string>('DB_HOST'),
+        port: Number(configService.get<number>('DB_PORT')),
+        username: configService.get<string>('DB_USERNAME'),
+        password: configService.get<string>('DB_PASSWORD'),
+        database: configService.get<string>('DB_NAME'),
+        entities: [
+            __dirname + '/../**/*.entity{.ts,.js}',
+        ],
+        synchronize: true,
+      }),
+    }),
     AuthModule,
+    PostModule,
     UserModule,
-    TagModule,
-    QuestionsModule,
-    ResponseModule,
+    CategoryModule,
+    TopicModule,
+    CategoryModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
